@@ -1,11 +1,11 @@
 /*
- * Rolando Rosales 1001850424 Coding Assignment 3
+ * Rolando Rosales 1001850424 Coding Assignment 4
  */
-package code3_1001850424;
+package code4_1001850424;
 
 import java.util.Scanner;
 
-public class Code3_1001850424
+public class Code4_1001850424
 {
     public enum ACTION
     {
