@@ -23,6 +23,13 @@ public class CokeMachine
         changeLevel = change;
         inventoryLevel = inventory;
     }
+    public CokeMachine()
+    {
+        machineName = "New Machine";
+        CokePrice = 50;
+        changeLevel = 500;
+        inventoryLevel = 100;
+    }
     public String getMachineName()
     {
         return machineName;
@@ -54,6 +61,14 @@ public class CokeMachine
     public int getNumberOfCokesSold()
     {
         return numberOfCokesSold;
+    }
+    public void setMachineName(String newMachineName)
+    {
+        this.machineName = newMachineName;
+    }
+    public void setCokePrice(int newCokePrice)
+    {
+        this.CokePrice = newCokePrice;
     }
     public boolean incrementInventoryLevel(int amountToAdd)
     {

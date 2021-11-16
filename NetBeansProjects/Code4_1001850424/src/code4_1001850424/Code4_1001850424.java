@@ -127,6 +127,22 @@ public class Code4_1001850424
                     System.out.print(MyCokeMachine.toString());
                     break;
                 }
+                case 5 :
+                {
+                    System.out.printf("\nEnter a new machine name\n");
+                    Scanner in = new Scanner(System.in);
+                    MyCokeMachine.setMachineName(in.nextLine());
+                    System.out.printf("\nMachine name has been updated");
+                    break;
+                }
+                case 6 : 
+                {
+                    System.out.printf("\nEnter a new Coke price\n");
+                    Scanner in = new Scanner(System.in);
+                    MyCokeMachine.setCokePrice(in.nextInt());
+                    System.out.printf("\nCoke price has been updated");
+                    break;
+                }
                 default :
                 {
                     System.out.printf("\nThis should never happen\n");
@@ -148,13 +164,15 @@ public class Code4_1001850424
     {
         System.out.printf("\n\n%s", MachineName);
         MenuChoice = -1;
-        while(MenuChoice < 0 || MenuChoice > 4)
+        while(MenuChoice < 0 || MenuChoice > 6)
         {
             System.out.print("\n\n0. Walk away"
                     + "\n1. Buy a Coke"
                     + "\n2. Restock Machine"
                     + "\n3. Add change"
-                    + "\n4. Display Machine Info");
+                    + "\n4. Display Machine Info"
+                    + "\n5. Update Machine Name"
+                    + "\n6. Update Coke Price");
             
             Scanner in = new Scanner(System.in);
             System.out.print("\n\nChoice: ");
@@ -169,7 +187,7 @@ public class Code4_1001850424
                 in.nextLine();
             }
             
-            if(MenuChoice < 0 || MenuChoice > 4)
+            if(MenuChoice < 0 || MenuChoice > 6)
             {
                 System.out.printf("\nInvalid menu option. Please choose again.");
             }
