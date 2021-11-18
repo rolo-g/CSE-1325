@@ -4,6 +4,8 @@
 package code4_1001850424;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,7 +16,7 @@ public class Code4_1001850424
         DISPENSECHANGE, INSUFFICIENTCHANGE, INSUFFICIENTFUNDS, EXACTPAYMENT
     }
             
-    public static void main(String[] args)
+    public static void main(String[] args)throws FileNotFoundException
     {
         int MachineMenuChoice = 1;
         int CokeMenuChoice = 1;
@@ -32,8 +34,7 @@ public class Code4_1001850424
         inputFileName = args[0].substring(args[0].indexOf('=') + 1);
         String outputFileName = new String();
         outputFileName = args[1].substring(args[1].indexOf('=') + 1);
-        
-            /*
+
             // DEBUG
         
             System.out.printf("\n\n(DEBUG) Use output as input? [1/0]\n");
@@ -42,7 +43,6 @@ public class Code4_1001850424
                 inputFileName = outputFileName;
         
             // DEBUG
-            */
             
         ReadFile(inputFileName, CM);
         
@@ -51,13 +51,16 @@ public class Code4_1001850424
             CokeMenuChoice = -1;
             MachineMenuChoice = MachineMenu(CM);
             
-            //System.out.printf("\n\ntest\n\n");
-            
-            if(MachineMenuChoice > 0)
+            if(MachineMenuChoice == CM.size() + 1)
             {
-                while(CokeMenuChoice != 0)
+                CM.add(new CokeMachine());
+            }
+            else
+            {
+                while(CokeMenuChoice != 0 && MachineMenuChoice != 0)
                 { 
-                    CokeMenuChoice = CokeMenu(CokeMenuChoice, CM.get(MachineMenuChoice-1).getMachineName());
+                    CokeMachine CokeMachine = CM.get(MachineMenuChoice - 1);
+                    CokeMenuChoice = CokeMenu(CokeMenuChoice, CokeMachine.getMachineName());
 
                     switch(CokeMenuChoice)
                     {
@@ -67,7 +70,7 @@ public class Code4_1001850424
                         }
                         case 1 :
                         {
-                            if (CM.get(MachineMenuChoice-1).getInventoryLevel() == 0)
+                            if (CokeMachine.getInventoryLevel() == 0)
                             {
                                 System.out.print("\nWe are out of Coke!");
                             }
@@ -75,12 +78,12 @@ public class Code4_1001850424
                             else
                             {   
                                 System.out.printf("Your total is ");
-                                System.out.printf(displayMoney(CM.get(MachineMenuChoice-1).getCokePrice()));
+                                System.out.printf(displayMoney(CokeMachine.getCokePrice()));
                                 System.out.printf("\nEnter your payment (in cents) ");
                                 Scanner in = new Scanner(System.in);
                                 payment = in.nextInt();
 
-                                switch(CM.get(MachineMenuChoice-1).buyACoke(payment))
+                                switch(CokeMachine.buyACoke(payment))
                                 {
                                     case EXACTPAYMENT :
                                     {
@@ -91,7 +94,7 @@ public class Code4_1001850424
                                     case DISPENSECHANGE :
                                     {
                                         System.out.printf("\nHere's your Coke and your change of %s"
-                                                , displayMoney(CM.get(MachineMenuChoice-1).getChangeDispensed()));
+                                                , displayMoney(CokeMachine.getChangeDispensed()));
                                         break;
                                     }
                                     case INSUFFICIENTCHANGE :
@@ -121,16 +124,16 @@ public class Code4_1001850424
                             Scanner in = new Scanner(System.in);
                             int amountToAdd = in.nextInt();
 
-                            if(CM.get(MachineMenuChoice-1).incrementInventoryLevel(amountToAdd) == true)
+                            if(CokeMachine.incrementInventoryLevel(amountToAdd) == true)
                             {
                                 System.out.printf("Your machine has been restocked"
-                                        + "\n\nYour inventory level is %d", CM.get(MachineMenuChoice-1).getInventoryLevel());
+                                        + "\n\nYour inventory level is %d", CokeMachine.getInventoryLevel());
                             }
                             else
                             {
                                 System.out.printf("You have exceeded your machine's max capacity"
                                         + " - no inventory was added"
-                                        + "\n\nYour inventory level is %d", CM.get(MachineMenuChoice-1).getInventoryLevel());
+                                        + "\n\nYour inventory level is %d", CokeMachine.getInventoryLevel());
                             }
                             break;
                         }
@@ -140,12 +143,12 @@ public class Code4_1001850424
                             Scanner in = new Scanner(System.in);
                             int amountToAdd = in.nextInt();
 
-                            if(CM.get(MachineMenuChoice-1).incrementChangeLevel(amountToAdd) == true)
+                            if(CokeMachine.incrementChangeLevel(amountToAdd) == true)
                             {
                                 System.out.printf("Your change level has been updated"
                                         + "\n\nYour change level is %s"
                                         + " with a max capacity of %s"
-                                        + "", displayMoney(CM.get(MachineMenuChoice-1).getChangeLevel()), displayMoney(CM.get(MachineMenuChoice-1).getMaxChangeCapacity()));
+                                        + "", displayMoney(CokeMachine.getChangeLevel()), displayMoney(CokeMachine.getMaxChangeCapacity()));
                             }
                             else
                             {
@@ -154,20 +157,20 @@ public class Code4_1001850424
                                         + "Your change level has been updated"
                                         + "\n\nYour change level is %s"
                                         + " with a max capacity of %s"
-                                        + "", displayMoney(CM.get(MachineMenuChoice-1).getChangeLevel()), displayMoney(CM.get(MachineMenuChoice-1).getMaxChangeCapacity()));
+                                        + "", displayMoney(CokeMachine.getChangeLevel()), displayMoney(CokeMachine.getMaxChangeCapacity()));
                             }
                             break;
                         }
                         case 4 :
                         {
-                            System.out.print(CM.get(MachineMenuChoice-1).toString());
+                            System.out.print(CokeMachine.toString());
                             break;
                         }
                         case 5 :
                         {
                             System.out.printf("\nEnter a new machine name\n");
                             Scanner in = new Scanner(System.in);
-                            CM.get(MachineMenuChoice-1).setMachineName(in.nextLine());
+                            CokeMachine.setMachineName(in.nextLine());
                             System.out.printf("\nMachine name has been updated");
                             break;
                         }
@@ -175,7 +178,7 @@ public class Code4_1001850424
                         {
                             System.out.printf("\nEnter a new Coke price\n");
                             Scanner in = new Scanner(System.in);
-                            CM.get(MachineMenuChoice-1).setCokePrice(in.nextInt());
+                            CokeMachine.setCokePrice(in.nextInt());
                             System.out.printf("\nCoke price has been updated");
                             break;
                         }
@@ -188,16 +191,7 @@ public class Code4_1001850424
                 }
             }
         }
-        /*
-        if(CM.get(MachineMenuChoice-1).getNumberOfCokesSold() > 0)
-        {
-            System.out.printf("\nEnjoy your Coke. Bye!\n");
-        }
-        else
-        {
-            System.out.printf("\n*You walk away without buying any Coke*\n");
-        }
-        */
+        WriteFile(CM, outputFileName);
     }
     static int CokeMenu(int MenuChoice, String MachineName)
     {
@@ -295,11 +289,6 @@ public class Code4_1001850424
                 in.nextLine();
             }
             
-            if(MenuChoice == i+1)
-            {
-                CM.add(new CokeMachine());
-            }
-
             if(MenuChoice < 0 || MenuChoice > i+1)
             {
                 System.out.printf("\nInvalid menu option. Please choose again.");
@@ -307,5 +296,27 @@ public class Code4_1001850424
         }
         
         return MenuChoice;
+    }
+    static void WriteFile(ArrayList<CokeMachine> CM, String FileName) throws FileNotFoundException
+    {
+        File FH = new File(FileName);
+        Scanner in = null;
+        
+        try
+        {   
+            in = new Scanner(FH);
+        }
+        catch (Exception e)
+        {
+            System.out.printf("Unable to write output file");
+        }
+        PrintWriter out = new PrintWriter(FileName);
+        
+        for(CokeMachine current : CM)
+        {
+            out.printf("%s|%s|%s|%s"
+                    + "\n", current.getMachineName(), current.getCokePrice(), current.getChangeLevel(), current.getInventoryLevel());
+        }
+        out.close();
     }
 }

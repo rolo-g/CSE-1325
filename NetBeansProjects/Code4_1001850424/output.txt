@@ -1,0 +1,2 @@
+New Machine|50|500|100
+New Machine|50|500|100
