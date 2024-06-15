@@ -1,10 +1,43 @@
-/NetBeansProjects/Code4_1001850424/nbproject/private/
-/NetBeansProjects/Code4_1001850424/build/
-/NetBeansProjects/Code4_1001850424 (copy 1)/build/
-/NetBeansProjects/Code4_1001850424 (copy 1)/nbproject/private/
+# Netbeans generated
 /NetBeansProjects/Code1_1001850424/build/
 /NetBeansProjects/Code1_1001850424/nbproject/private/
-/NetBeansProjects/Code1_1001850424 (copy 1)/build/
-/NetBeansProjects/Code1_1001850424 (copy 1)/nbproject/private/
+
 /NetBeansProjects/Code2_1001850424/build/
 /NetBeansProjects/Code2_1001850424/nbproject/private/
+
+/NetBeansProjects/Code3_1001850424/build/
+/NetBeansProjects/Code3_1001850424/nbproject/private/
+
+/NetBeansProjects/Code4_1001850424/nbproject/private/
+/NetBeansProjects/Code4_1001850424/build/
+
+/NetBeansProjects/Code5_1001850424/build/
+/NetBeansProjects/Code5_1001850424/nbproject/private/
+
+/NetBeansProjects/Code6_1001850424/build/
+/NetBeansProjects/Code6_1001850424/nbproject/private/
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+replay_pid*
